@@ -1,0 +1,31 @@
+{
+    "name": "indiesystems/laravel-adminlte-ui-components",
+    "description": "A Laravel package with components for adminLTE bootstrap 4 UI",
+    "keywords": ["laravel", "sanctum", "indiesystems", "adminlte", "permission", "permissions", "roles", "bootstrap", "ui"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "Chris Dimas",
+        "email": "chris@indie.systems",
+        "homepage": "https://indie.systems",
+        "role": "Developer"
+    }],
+    "homepage": "https://github.com/indiesystems/laravel-adminlte-ui-components",
+    "autoload": {
+        "psr-4": {
+            "IndieSystems\\AdminLteUiComponents\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IndieSystems\\AdminLteUiComponents\\AdminLteUiComponentsProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "laravel/sanctum": "^3.0"
+    }
+}
