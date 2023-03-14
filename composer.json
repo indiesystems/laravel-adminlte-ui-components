@@ -19,13 +19,14 @@
     "extra": {
         "laravel": {
             "providers": [
-                "IndieSystems\\AdminLteUiComponents\\Providers\\AdminLteUiComponentsProvider"
+                "IndieSystems\\AdminLteUiComponents\\Providers\\PermissionsUiProvider"
             ]
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "php": ">=8.1",
         "laravel/sanctum": "^3.0"
     }
 }
