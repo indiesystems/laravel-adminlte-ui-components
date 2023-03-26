@@ -15,7 +15,13 @@
                     <tr>
                         <td><a href="{{ route( $resource . '.show', $entry->id) }}">{{ $entry->{$fields[0]} }}</a></td>
                         @foreach(array_slice($fields, 1) as $field)
-                        <td>{{ $entry->{$field} }}</td>
+                            @if(in_array(\IndieSystems\AdminLteUiComponents\Traits\Formable::class, class_uses_recursive($entry::class)))
+                                @if($entry->isField($field,'select'))
+                                    <td>{{ $entry->getSelectedFieldLabel($field, $entry->{$field}) }}</td>
+                                    @continue
+                                @endif
+                            @endif
+                            <td>{{ $entry->{$field} }}</td>
                         @endforeach
                         <td>
                             <x-AdminLteUiComponentsView::forms.crud-controls :resource="$resource" :modelId="$entry->id"/>
