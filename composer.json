@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "IndieSystems\\AdminLteUiComponents\\Providers\\PermissionsUiProvider"
+                "IndieSystems\\AdminLteUiComponents\\Providers\\AdminLteUiComponentsProvider"
             ]
         }
     },
