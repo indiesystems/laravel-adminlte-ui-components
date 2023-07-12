@@ -1,0 +1,100 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
+use {{ namespacedRequests }}
+
+class {{ class }} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $collection = {{ model }}::paginate();
+        return view('resourceName.index', [
+            'title'      => '{{ model }}',
+            'routeName'  => 'resourceName.create',
+            'resource'   => 'resourceName',
+            'headers'    => [],
+            'fields'     => [],
+            'collection' => $collection,
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $fields = (new {{ model }})->getFormFields();
+        return view('resourceName.create', [
+            'title'     => 'Create {{ model }}',
+            'routeName' => 'resourceName.index',
+            'fields'    => $fields,
+            'resource'  => 'resourceName',
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store({{ storeRequest }} $request)
+    {
+        {{ model }}::create($request->validated());
+        return redirect()->route('resourceName.index')->with('success', '{{ model }} has been created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{ model }} ${{ modelVariable }})
+    {
+        $fields = (new {{ model }})->getFormFields();
+        return view('resourceName.show', [
+            'title'      => '{{ model }} details',
+            'routeName'  => 'resourceName.index',
+            'cardHeader' => 'Details',
+            'resource'   => 'resourceName',
+            'fields'     => $fields,
+            'model'      => ${{ modelVariable }},
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit({{ model }} ${{ modelVariable }})
+    {
+        $fields = (new {{ model }})->getFormFields();
+        return view('resourceName.edit', [
+            'title'     => 'Edit {{ model }}',
+            'routeName' => 'resourceName.index',
+            'fields'    => $fields,
+            'resource'  => 'resourceName',
+            'model'     => ${{ modelVariable }},
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update({{ updateRequest }} $request, {{ model }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->fill($request->validated())->save();
+        return redirect()->route('resourceName.index')->with('success', '{{ model }} has Been updated successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+        if (!${{ modelVariable }}->delete()) {
+            return redirect()->route('resourceName.index')->with('error', 'Failed to delete {{ model }}');
+        }
+        return redirect()->route('resourceName.index')->with('success', '{{ model }} has been deleted successfully');
+    }
+}

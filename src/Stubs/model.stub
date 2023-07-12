@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use IndieSystems\AdminLteUiComponents\Traits\Formable;
+
+class {{ class }} extends Model
+{
+    use HasFactory, Formable;
+
+    protected $fillable = [
+        'attribute1',
+        'attribute2',
+    ];
+
+    public $fillableFormFields = [
+        ['type' => 'text', 'name' => '', 'placeholder' => '', 'label' => 'attribute1'],
+        ['type' => 'select', 'name' => 'type', 'placeholder' => '', 'label' => 'attribute2', 'enum' => [
+            ['value' => 'attribute2value1', 'label' => 'Value1'],
+            ['value' => 'attribute2value2', 'label' => 'Value2'],
+        ]],
+    ];
+}
