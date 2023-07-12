@@ -20,6 +20,10 @@
                                     <td>{{ $entry->getSelectedFieldLabel($field, $entry->{$field}) }}</td>
                                     @continue
                                 @endif
+                                @if($entry->isField($field,'file'))
+                                    <td><a href="{{ !empty($entry->{$field}) ? asset($entry->{$field}) : '#' }}" target="{{ !empty($entry->{$field}) ? '_blank' : '_self' }}">{{ $entry->{$field} ? __('Download') : 'No file' }}<a/></td>
+                                    @continue
+                                @endif
                             @endif
                             <td>{{ $entry->{$field} }}</td>
                         @endforeach

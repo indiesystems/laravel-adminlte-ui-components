@@ -35,6 +35,9 @@ trait Formable
     {
         $field =  $this->getFormField($name);
         if($field && isset($field['enum'])){
+            if (is_string($field['enum']) && method_exists($this, $field['enum'])) {
+                return \call_user_func([$this, $field['enum']]);
+            }
             return $field['enum'];
         }
         return false;
