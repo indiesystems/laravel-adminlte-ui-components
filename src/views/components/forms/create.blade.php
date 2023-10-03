@@ -2,11 +2,11 @@
     @csrf
     @method($method ?? 'POST')
     <div class="row">
-        @foreach($fields as $field)
+        @foreach($fields as $fieldIndex => $field)
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>{{ $field['label'] }}:</strong>
-                    @if($field['type'] !== 'select')
+                    @if($field['type'] !== 'select' && $field['type'] !== 'checkbox')
                     <input type="{{ $field['type'] ?? 'text' }}" name="{{ $field['name'] }}" value="{{ old($field['name']) }}" class="form-control" placeholder="{{ $field['placeholder'] ?? '' }}">
                     @elseif($field['type'] === 'select')
                     <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" name="{{ $field['name'] }}" id="{{ $field['name'] }}">
@@ -16,6 +16,11 @@
                             @endforeach
                         @endif
                     </select>
+                    @elseif($field['type'] === 'checkbox')
+                    <div class="custom-control custom-switch">
+                        <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" value="{{ $field['value'] }}" id="customSwitch{{ $fieldIndex }}" class="form-control custom-control-input" placeholder="{{ $field['placeholder'] ?? '' }}" @checked( old($field['name']) )>
+                        <label class="custom-control-label" for="customSwitch{{ $fieldIndex }}">On/off</label>
+                    </div>
                     @endif
                     @error($field['name'])
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
