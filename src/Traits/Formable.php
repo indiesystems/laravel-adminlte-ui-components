@@ -7,6 +7,14 @@ trait Formable
     {
         foreach ($this->fillable as $key => $name) {
             $this->fillableFormFields[$key]['name'] = $name;
+            
+            // in case this is an enum field with callback function, fill with values
+            if(isset($this->fillableFormFields[$key]['enum']) &&
+                is_string($this->fillableFormFields[$key]['enum']) &&
+                method_exists($this, $this->fillableFormFields[$key]['enum'])
+            ){
+                $this->fillableFormFields[$key]['enum'] = \call_user_func([$this, $this->fillableFormFields[$key]['enum']]);
+            }
         }
 
         return $this->fillableFormFields;
