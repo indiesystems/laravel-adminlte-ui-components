@@ -23,6 +23,9 @@
                                 @if($entry->isField($field,'file'))
                                     <td><a href="{{ !empty($entry->{$field}) ? asset($entry->{$field}) : '#' }}" target="{{ !empty($entry->{$field}) ? '_blank' : '_self' }}">{{ $entry->{$field} ? __('Download') : 'No file' }}<a/></td>
                                     @continue
+                                @elseif($entry->isField($field,'image'))
+                                    <td class="w-25"><div class="text-center"><img src="{{ asset($entry->{$field}) ?: $entry->{$field} }}" alt="" class="mx-auto img-fluid img-thumbnail" style="width:75px;"></div></td>
+                                    @continue
                                 @endif
                             @endif
                             <td>{{ $entry->{$field} }}</td>
