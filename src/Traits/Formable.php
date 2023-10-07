@@ -5,9 +5,9 @@ trait Formable
 {
     public function getFormFields()
     {
-        foreach ($this->fillable as $key => $name) {
+        foreach ($this->formable ?? $this->fillable as $key => $name) {
             $this->fillableFormFields[$key]['name'] = $name;
-            
+
             // in case this is an enum field with callback function, fill with values
             if(isset($this->fillableFormFields[$key]['enum']) &&
                 is_string($this->fillableFormFields[$key]['enum']) &&
