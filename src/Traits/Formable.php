@@ -3,6 +3,8 @@ namespace IndieSystems\AdminLteUiComponents\Traits;
 
 trait Formable
 {
+    public $htmlClasses = [];
+    
     public function getFormFields()
     {
         foreach ($this->formable ?? $this->fillable as $key => $name) {
@@ -62,5 +64,13 @@ trait Formable
             }
         }
         return $value;
+    }
+
+    public function getHtmlClasses()
+    {
+        if(property_exists($this, 'htmlClasses') && !empty($this->htmlClasses)){
+            return trim(implode(' ', $this->htmlClasses));
+        }
+        return null;
     }
 }
