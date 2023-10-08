@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 @foreach ($collection as $entry)
-                    <tr>
+                    <tr class="{{ in_array(\IndieSystems\AdminLteUiComponents\Traits\Formable::class, class_uses_recursive($entry::class)) ? $entry->getHtmlClasses() : '' }}">
                         <td><a href="{{ route( $resource . '.show', $entry->id) }}">{{ $entry->{$fields[0]} }}</a></td>
                         @foreach(array_slice($fields, 1) as $field)
                             @if(in_array(\IndieSystems\AdminLteUiComponents\Traits\Formable::class, class_uses_recursive($entry::class)))
