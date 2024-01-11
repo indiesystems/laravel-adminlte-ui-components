@@ -9,10 +9,10 @@
                     @if($field['type'] !== 'select' && $field['type'] !== 'checkbox')
                     <input type="{{ $field['type'] ?? 'text' }}" name="{{ $field['name'] }}" value="{{ $model->{$field['name']} }}" class="form-control" placeholder="{{ $field['placeholder'] ?? '' }}">
                     @elseif($field['type'] === 'select')
-                    <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" name="{{ $field['name'] }}" id="{{ $field['name'] }}">
+                    <select class="form-control {{ $field['class'] ?? '' }}" style="width: 100%;" tabindex="-1" aria-hidden="true" name="{{ $field['name'] }}{{ in_array('multiple',$field['attributes'] ?? []) ? '[]' : '' }}" id="{{ $field['name'] }}" {{ html_attributes($field['attributes'] ?? []) }}>
                         @if($field['enum'])
                             @foreach($field['enum'] as $option)
-                            <option value="{{ $option['value'] ?? '' }}" @selected($model->{$field['name']} === ($option['value'] ?? ''))>{{ $option['label'] ?? $option['value'] ?? 'Not defined' }}</option>
+                            <option value="{{ $option['value'] ?? '' }}" @selected($field['name'] === ($option['value'] ?? ''))>{{ $option['label'] ?? $option['value'] ?? 'Not defined' }}</option>
                             @endforeach
                         @endif
                     </select>
