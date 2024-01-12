@@ -1,6 +1,8 @@
 <?php
 namespace IndieSystems\AdminLteUiComponents\Traits;
 
+use Illuminate\Database\Eloquent\Collection;
+
 trait Formable
 {
     public $htmlClasses = [];
@@ -81,6 +83,7 @@ trait Formable
         }
         return $value;
     }
+
     public function getHtmlClasses()
     {
         if(property_exists($this, 'htmlClasses') && !empty($this->htmlClasses)){
