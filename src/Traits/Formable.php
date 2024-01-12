@@ -56,16 +56,31 @@ trait Formable
     public function getSelectedFieldLabel($name, $value)
     {
         $enums = $this->getEnumField($name);
+        $out = '';
         if($enums){
             foreach ($enums as $key => $enum) {
-                if(isset($enum['value'], $enum['label']) && $enum['value'] === $value){
-                    return $enum['label'];
+                if(isset($enum['value'], $enum['label'])){
+                    if($enum['value'] === $value){
+                        return $enum['label'];
+                   
+                    } elseif(is_array($value) || $value instanceof Collection){
+                        
+
+                        if($value instanceof Collection) {
+                            $value = array_column($value->toArray(), 'id');
+                        }
+                        foreach ($value as $vkey => $value_value) {
+                            if($enum['value'] == $value_value){
+                                $out .= $enum['label'] . ', ';
+                            }
+                        }
+                    }
                 }
             }
+            if($out) return rtrim($out,', ');
         }
         return $value;
     }
-
     public function getHtmlClasses()
     {
         if(property_exists($this, 'htmlClasses') && !empty($this->htmlClasses)){
