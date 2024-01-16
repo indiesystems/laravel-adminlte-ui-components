@@ -59,15 +59,16 @@ trait Formable
     {
         $enums = $this->getEnumField($name);
         $out = '';
+        $isMultiple = false;
         if($enums){
             foreach ($enums as $key => $enum) {
                 if(isset($enum['value'], $enum['label'])){
                     if($enum['value'] === $value){
+
                         return $enum['label'];
                    
                     } elseif(is_array($value) || $value instanceof Collection){
-                        
-
+                        $isMultiple = true;
                         if($value instanceof Collection) {
                             $value = array_column($value->toArray(), 'id');
                         }
@@ -79,7 +80,9 @@ trait Formable
                     }
                 }
             }
-            if($out) return rtrim($out,', ');
+            if($isMultiple) {
+                return rtrim($out,', ');
+            }
         }
         return $value;
     }
