@@ -14,7 +14,10 @@
     "autoload": {
         "psr-4": {
             "IndieSystems\\AdminLteUiComponents\\": "src/"
-        }
+        },
+        "files": [
+            "helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
