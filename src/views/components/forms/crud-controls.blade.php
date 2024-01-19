@@ -1,5 +1,5 @@
 <form class="btn-group" action="{{ route($resource . '.destroy', $modelId) }}" method="post">
-    @can($resource . '.show')
+    @can($resource . '.list')
     <a class="btn btn-success btn-sm" href="{{ route($resource . '.show', $modelId) }}">View</a>
     @endcan
     @can($resource . '.edit')
