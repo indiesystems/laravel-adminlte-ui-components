@@ -3,7 +3,7 @@
         <div class="pull-left mb-2">
             <h2>{{ $title }}</h2>
         </div>
-        @can($routeName)
+        @can(routePermission($routeName))
         <div class="pull-right mb-2">
             <a class="btn btn-primary btn-sm" href="{{ route($routeName) }}"> {{ $buttonName }}</a>
         </div>

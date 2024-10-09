@@ -16,7 +16,7 @@
             "IndieSystems\\AdminLteUiComponents\\": "src/"
         },
         "files": [
-            "helpers.php"
+            "src/helpers.php"
         ]
     },
     "extra": {
