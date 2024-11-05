@@ -44,6 +44,12 @@ class AdminLteUiComponentsProvider extends ServiceProvider
             $this->commands([
                 CreateResourceViewsCommand::class,
             ]);
+
+            // Publish view components
+            $this->publishes([
+                __DIR__ . '/../Components/'        => app_path('View/Components'),
+                __DIR__ . '/../views/components/' => resource_path('views/components'),
+            ], 'view-components');
         }
     }
 
