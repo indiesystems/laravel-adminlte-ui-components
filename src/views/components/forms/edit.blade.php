@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <strong>{{ $field['label'] }}:</strong>
                     @if($field['type'] !== 'select' && $field['type'] !== 'checkbox')
-                    <input type="{{ $field['type'] ?? 'text' }}" name="{{ $field['name'] }}" value="{{ $model->{$field['name']} }}" class="form-control" placeholder="{{ $field['placeholder'] ?? '' }}">
+                    <input type="{{ $field['type'] ?? 'text' }}" name="{{ $field['name'] }}" value="{{ $model->{$field['name']} }}" class="form-control {{ $field['class'] ?? '' }}" placeholder="{{ $field['placeholder'] ?? '' }}">
                     @elseif($field['type'] === 'select')
                     <select class="form-control {{ $field['class'] ?? '' }}" style="width: 100%;" tabindex="-1" aria-hidden="true" name="{{ $field['name'] }}{{ in_array('multiple', $field['attributes'] ?? []) ? '[]' : '' }}" id="{{ $field['name'] }}" {{ html_attributes($field['attributes'] ?? []) }}>
                         @if($field['enum'])
@@ -19,7 +19,7 @@
                     </select>
                     @elseif($field['type'] === 'checkbox')
                     <div class="custom-control custom-switch">
-                        <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" value="{{ $field['value'] }}" id="customSwitch{{ $fieldIndex }}" class="form-control custom-control-input" placeholder="{{ $field['placeholder'] ?? '' }}" @checked($model->{$field['name']})>
+                        <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" value="{{ $field['value'] }}" id="customSwitch{{ $fieldIndex }}" class="form-control custom-control-input {{ $field['class'] ?? '' }}" placeholder="{{ $field['placeholder'] ?? '' }}" @checked($model->{$field['name']})>
                         <label class="custom-control-label" for="customSwitch{{ $fieldIndex }}">On/off</label>
                     </div>
                     @endif

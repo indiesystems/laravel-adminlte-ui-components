@@ -24,10 +24,16 @@
                                     <td><a href="{{ !empty($entry->{$field}) ? asset($entry->{$field}) : '#' }}" target="{{ !empty($entry->{$field}) ? '_blank' : '_self' }}">{{ $entry->{$field} ? __('Download') : 'No file' }}<a/></td>
                                     @continue
                                 @elseif($entry->isField($field,'image'))
-                                    <td class="w-25"><div class="text-center"><img src="{{ asset($entry->{$field}) ?: $entry->{$field} }}" alt="" class="mx-auto img-fluid img-thumbnail" style="width:75px;"></div></td>
+                                    <td class="w-25">
+                                        <div class="text-center">
+                                            <img src="{{ asset($entry->{$field}) ?: $entry->{$field} }}" alt="" class="mx-auto img-fluid img-thumbnail" style="width:75px;">
+                                        </div>
+                                    </td>
                                     @continue
                                 @elseif($entry->isField($field,'color'))
-                                    <td><span class="color-field badge badge-pill" style="width:25px; height:25px; display: block; background-color:{{ $entry->{$field} ?: ''  }};"></span></td>
+                                    <td>
+                                        <span class="color-field badge badge-pill" style="width:25px; height:25px; display: block; background-color:{{ $entry->{$field} ?: ''  }};"></span>
+                                    </td>
                                     @continue
                                 @endif
                             @endif

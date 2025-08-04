@@ -27,6 +27,13 @@ class AdminLteUiComponentsProvider extends ServiceProvider
             \IndieSystems\AdminLteUiComponents\Components\Forms\CrudControls::class,
             \IndieSystems\AdminLteUiComponents\Components\Forms\Edit::class,
             \IndieSystems\AdminLteUiComponents\Components\Forms\ModelTable::class,
+            \IndieSystems\AdminLteUiComponents\Components\Widgets\CollapsibleCard::class,
+            \IndieSystems\AdminLteUiComponents\Components\Widgets\ProgressBar::class,
+            \IndieSystems\AdminLteUiComponents\Components\Widgets\InfoBox::class,
+            \IndieSystems\AdminLteUiComponents\Components\Widgets\SmallBox::class,
+            \IndieSystems\AdminLteUiComponents\Components\Alert::class,
+            \IndieSystems\AdminLteUiComponents\Components\ImageGallery::class,
+            \IndieSystems\AdminLteUiComponents\Components\Pill::class,
         ]);
 
         // if ($this->app->runningInConsole()) {
