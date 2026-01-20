@@ -34,6 +34,10 @@ class AdminLteUiComponentsProvider extends ServiceProvider
             \IndieSystems\AdminLteUiComponents\Components\Alert::class,
             \IndieSystems\AdminLteUiComponents\Components\ImageGallery::class,
             \IndieSystems\AdminLteUiComponents\Components\Pill::class,
+            \IndieSystems\AdminLteUiComponents\Components\Ecommerce\SaasPackage::class,
+            \IndieSystems\AdminLteUiComponents\Components\Ecommerce\SaasPackageList::class,
+            \IndieSystems\AdminLteUiComponents\Components\Ecommerce\ProductCard::class,
+            \IndieSystems\AdminLteUiComponents\Components\Ecommerce\ProductCardList::class,
         ]);
 
         // if ($this->app->runningInConsole()) {
@@ -57,6 +61,11 @@ class AdminLteUiComponentsProvider extends ServiceProvider
                 __DIR__ . '/../Components/'        => app_path('View/Components'),
                 __DIR__ . '/../views/components/' => resource_path('views/components'),
             ], 'view-components');
+
+            $this->publishes([
+                __DIR__ . '/../views/layouts/public.blade.php' => resource_path('views/layouts/public.blade.php'),
+                __DIR__ . '/../views/welcome.blade.php' => resource_path('views/welcome.blade.php'),
+            ], 'view-layouts-public');
         }
     }
 
