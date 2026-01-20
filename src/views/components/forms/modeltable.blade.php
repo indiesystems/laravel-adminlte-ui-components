@@ -20,6 +20,17 @@
                                     <td>{{ $entry->getSelectedFieldLabel($field, $entry->{$field}) }}</td>
                                     @continue
                                 @endif
+                                @if($entry->isField($field,'checkbox'))
+                                    @php $displayData = $entry->getDisplayValue($field); @endphp
+                                    <td>
+                                        @if($displayData['raw'])
+                                            {!! $displayData['value'] !!}
+                                        @else
+                                            {{ $displayData['value'] }}
+                                        @endif
+                                    </td>
+                                    @continue
+                                @endif
                                 @if($entry->isField($field,'file'))
                                     <td><a href="{{ !empty($entry->{$field}) ? asset($entry->{$field}) : '#' }}" target="{{ !empty($entry->{$field}) ? '_blank' : '_self' }}">{{ $entry->{$field} ? __('Download') : 'No file' }}<a/></td>
                                     @continue

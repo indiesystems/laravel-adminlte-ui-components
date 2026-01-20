@@ -94,4 +94,72 @@ trait Formable
         }
         return null;
     }
+
+    /**
+     * Get the display value for a field.
+     *
+     * Supports:
+     * - 'display_values' array in field config with true/false keys
+     * - Callable string (method name) for dynamic display values
+     * - Fallback to getXxxDisplayValue() method convention
+     *
+     * Returns array with 'value' and 'raw' (whether to render as HTML)
+     *
+     * @param string $name Field name
+     * @return array{value: mixed, raw: bool}
+     */
+    public function getDisplayValue($name)
+    {
+        $field = $this->getFormField($name);
+        $value = $this->{$name};
+        $isRaw = false;
+
+        // Check for display_raw flag in field config
+        if ($field && isset($field['display_raw'])) {
+            $isRaw = (bool) $field['display_raw'];
+        }
+
+        // Check for explicit display_values config
+        if ($field && isset($field['display_values'])) {
+            $displayValues = $field['display_values'];
+
+            // Handle callable (method name string)
+            if (is_string($displayValues) && method_exists($this, $displayValues)) {
+                $displayValues = $this->{$displayValues}();
+            }
+
+            if (is_array($displayValues)) {
+                $key = (bool) $value;
+                if (isset($displayValues[$key])) {
+                    return ['value' => $displayValues[$key], 'raw' => $isRaw];
+                }
+            }
+        }
+
+        // Fallback: check for model method getXxxDisplayValue()
+        $method = 'get' . \Illuminate\Support\Str::studly($name) . 'DisplayValue';
+        if (method_exists($this, $method)) {
+            return ['value' => $this->{$method}($value), 'raw' => $isRaw];
+        }
+
+        return ['value' => $value, 'raw' => false];
+    }
+
+    /**
+     * Check if a field has custom display value configuration.
+     *
+     * @param string $name Field name
+     * @return bool
+     */
+    public function hasDisplayValue($name)
+    {
+        $field = $this->getFormField($name);
+
+        if ($field && isset($field['display_values'])) {
+            return true;
+        }
+
+        $method = 'get' . \Illuminate\Support\Str::studly($name) . 'DisplayValue';
+        return method_exists($this, $method);
+    }
 }
