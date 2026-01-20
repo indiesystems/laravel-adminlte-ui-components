@@ -11,6 +11,15 @@
                             {{ $model->getSelectedFieldLabel($field['name'], $model->{$field['name']}) }}
                             @continue
                         @endif
+                        @if($model->isField($field['name'],'checkbox'))
+                            @php $displayData = $model->getDisplayValue($field['name']); @endphp
+                            @if($displayData['raw'])
+                                {!! $displayData['value'] !!}
+                            @else
+                                {{ $displayData['value'] }}
+                            @endif
+                            @continue
+                        @endif
                         @if($model->isField($field['name'],'file'))
                             <a href="{{ !empty($model->{$field['name']}) ? asset($model->{$field['name']}) : '#' }}" target="{{ !empty($model->{$field['name']}) ? '_blank' : '_self' }}">{{ $model->{$field['name']} ? __('Download') : 'No file' }}<a/>
                             @continue
@@ -18,7 +27,7 @@
                             <div class="w-25"><div class="text-center"><img src="{{ asset($model->{$field['name']}) ?: $model->{$field['name']} }}" alt="" class="mx-auto img-fluid img-thumbnail" style="width:75px;"></div></div>
                             @continue
                         @elseif($model->isField($field['name'],'color'))
-                            <div class="w-25"><span class="color-field badge badge-pill" style="width:25px; height:25px; display: block; background-color:{{ $model->{$field['name']} ?: ''  }};"></span></divdi>
+                            <div class="w-25"><span class="color-field badge badge-pill" style="width:25px; height:25px; display: block; background-color:{{ $model->{$field['name']} ?: ''  }};"></span></div>
                             @continue
                         @elseif($model->isField($field['name'],'password'))
                             @php $inputId = 'secret-' . \Str::uuid(); @endphp
