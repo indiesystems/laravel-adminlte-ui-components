@@ -4,8 +4,17 @@
         <table class="table table-bordered table-striped table-valign-middle">
             <thead>
                 <tr>
-                    @foreach($headers as $header)
-                        <th>{{ $header }}</th>
+                    @foreach($headers as $index => $header)
+                        <th>
+                            @if(!empty($sortable) && in_array($fields[$index] ?? '', $sortable))
+                                <a href="{{ $sortUrls[$fields[$index]] }}" class="text-dark text-decoration-none">
+                                    {{ $header }}
+                                    <i class="{{ $sortIcons[$fields[$index]] }} ml-1" style="font-size: 0.75em;"></i>
+                                </a>
+                            @else
+                                {{ $header }}
+                            @endif
+                        </th>
                     @endforeach
                     <th width="280px">Action</th>
                 </tr>

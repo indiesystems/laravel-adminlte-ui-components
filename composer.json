@@ -11,6 +11,10 @@
         "role": "Developer"
     }],
     "homepage": "https://github.com/indiesystems/laravel-adminlte-ui-components",
+    "support": {
+        "issues": "https://github.com/indiesystems/laravel-adminlte-ui-components/issues",
+        "source": "https://github.com/indiesystems/laravel-adminlte-ui-components"
+    },
     "autoload": {
         "psr-4": {
             "IndieSystems\\AdminLteUiComponents\\": "src/"
