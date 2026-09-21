@@ -21,7 +21,17 @@ trait Formable
             }
         }
 
-        return $this->fillableFormFields;
+        // Translate on the way out, never into the stored property: keeps the model's field
+        // definitions as keys, so every call renders in the *current* locale.
+        return array_map(function (array $field) {
+            foreach (['label', 'placeholder'] as $attribute) {
+                if (isset($field[$attribute])) {
+                    $field[$attribute] = __($field[$attribute]);
+                }
+            }
+
+            return $field;
+        }, $this->fillableFormFields);
     }
 
     public function getFormField($name)
